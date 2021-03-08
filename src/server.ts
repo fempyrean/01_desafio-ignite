@@ -7,7 +7,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-function checksExistsUserAccount(req: Request, res: Response, next: NextFunction): void {
+function checksExistsUserAccount (req: Request, res: Response, next: NextFunction): void {
   // Complete aqui
 }
 
