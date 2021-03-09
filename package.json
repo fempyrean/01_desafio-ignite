@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/app.ts",
+    "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
     "test": "jest",
     "test:staged": "jest"
   },
