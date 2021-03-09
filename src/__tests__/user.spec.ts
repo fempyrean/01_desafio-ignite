@@ -21,4 +21,12 @@ describe('Users', () => {
     })
     expect(response.status).toBe(201)
   })
+
+  test('Should not be able to create a new user when username already exists', async () => {
+    const response = await request(app).post('/users').send({
+      name: 'any_name',
+      username: 'any_username'
+    })
+    expect(response.status).toBe(400)
+  })
 })
