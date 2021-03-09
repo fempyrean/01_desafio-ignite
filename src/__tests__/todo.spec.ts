@@ -61,4 +61,11 @@ describe('Todos', () => {
     expect(response.body).toHaveProperty('error')
     expect(response.status).toBe(404)
   })
+
+  test('Should be able to mark a todo as done', async () => {
+    const { id } = user.body
+    const { id: todoId } = todo.body
+    const response = await request(app).patch(`/todos/${String(todoId)}/done`).set('user', id).send()
+    expect(response.status).toBe(204)
+  })
 })
