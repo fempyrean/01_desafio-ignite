@@ -65,7 +65,7 @@ app.put('/todos/:id', checksExistsUserAccount, async (req: Request, res: Respons
   const { id } = req.params
   const todosRepo = getRepository(Todo)
   const todo = await todosRepo.findOne({ id, user_id: req.user.id })
-  if (!todo) return res.status(400).send({ error: 'Could not find todo' })
+  if (!todo) return res.status(404).send({ error: 'Could not find todo' })
   /** Here, we have a valid todo. We shall update it with the data sent on the request */
   const updatedTodo = {
     ...todo,
@@ -73,7 +73,7 @@ app.put('/todos/:id', checksExistsUserAccount, async (req: Request, res: Respons
   }
   await todosRepo.save(updatedTodo)
 
-  return res.status(200).send(updatedTodo)
+  return res.status(204).send(updatedTodo)
 })
 
 app.patch('/todos/:id/done', checksExistsUserAccount, async (req: Request, res: Response): Promise<void> => {
