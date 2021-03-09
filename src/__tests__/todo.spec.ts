@@ -68,4 +68,11 @@ describe('Todos', () => {
     const response = await request(app).patch(`/todos/${String(todoId)}/done`).set('user', id).send()
     expect(response.status).toBe(204)
   })
+
+  test('Should not be able to mark a non existing todo as done', async () => {
+    const { id } = user.body
+    const response = await request(app).patch('/todos/invalid_id/done').set('user', id).send()
+    expect(response.body).toHaveProperty('error')
+    expect(response.status).toBe(404)
+  })
 })
