@@ -21,8 +21,7 @@ export class CreateTodos1615287420238 implements MigrationInterface {
           },
           {
             name: 'done',
-            type: 'boolean',
-            default: 'false'
+            type: 'boolean'
           },
           {
             name: 'deadline',
@@ -36,8 +35,7 @@ export class CreateTodos1615287420238 implements MigrationInterface {
           },
           {
             name: 'deleted_at',
-            type: 'timestamp',
-            default: 'now()'
+            type: 'timestamp'
           },
           {
             name: 'updated_at',
