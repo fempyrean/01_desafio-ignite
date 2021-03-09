@@ -31,4 +31,13 @@ describe('Todos', () => {
     const response = await request(app).get('/todos').set('user', id).send()
     expect(response.body.length).toBe(1)
   })
+
+  test('Should be able to create a new todo', async () => {
+    const { id } = user.body
+    const response = await request(app).post('/todos').set('user', id).send({
+      title: 'any_title',
+      deadline: '2021-12-31'
+    })
+    expect(response.status).toBe(201)
+  })
 })
