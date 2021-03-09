@@ -18,28 +18,28 @@ Tudo isso para cada usuário em específico (o `username` será passado pelo hea
 
 ## Routes
 
-**POST** /users
+**POST** */users*
 A rota recebe name e username dentro do corpo da requisição. Ao cadastrar um novo usuário, este é armazenado no banco.
 
-**GET** /todos
+**GET** */todos*
 A rota deve receber, pelo header da requisição, uma propriedade user contendo o id do usuário.
 A rota retorna uma lista com todas as tarefas deste usuário.
 
-**POST** /todos
+**POST** */todos*
 A rota deve receber, pelo header da requisição, uma propriedade user contendo o id do usuário.
 A rota deve receber title e deadline dentro do corpo da requisição.
 Ao criar um novo **todo**, é criado um registro no banco.
 A rota retorna o todo criado
 
-**PUT** /todos/:id
+**PUT** */todos/:id*
 A rota deve receber, pelo header da requisição, uma propriedade user contendo o id do usuário.
 A rota deve receber as propriedades title e deadline dentro do corpo da requisição.
 O **todo** é atualizado com o que for enviado no corpo da requisição.
 
-**PATCH** /todos/:id/done
+**PATCH** */todos/:id/done*
 A rota deve receber, pelo header da requisição, uma propriedade user contendo o id do usuário.
 A **todo** que possuir o :id informado será atualizado para done.
 
-**DELETE** /todos/:id
+**DELETE** */todos/:id*
 A rota deve receber, pelo header da requisição, uma propriedade user contendo o id do usuário.
 O **todo** que possuir o :id, será removido.
