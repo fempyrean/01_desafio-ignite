@@ -51,4 +51,14 @@ describe('Todos', () => {
     })
     expect(response.status).toBe(204)
   })
+
+  test('Should not be able to update a non existing todo', async () => {
+    const { id } = user.body
+    const response = await request(app).put('/todos/invalid_id').set('user', id).send({
+      title: 'new_title',
+      deadline: '2022-01-01'
+    })
+    expect(response.body).toHaveProperty('error')
+    expect(response.status).toBe(404)
+  })
 })
