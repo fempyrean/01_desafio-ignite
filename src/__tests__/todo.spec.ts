@@ -75,4 +75,11 @@ describe('Todos', () => {
     expect(response.body).toHaveProperty('error')
     expect(response.status).toBe(404)
   })
+
+  test('Should be able to delete a todo', async () => {
+    const { id } = user.body
+    const { id: todoId } = todo.body
+    const response = await request(app).delete(`/todos/${String(todoId)}`).set('user', id).send()
+    expect(response.status).toBe(204)
+  })
 })
