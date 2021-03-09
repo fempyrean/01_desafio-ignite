@@ -80,7 +80,7 @@ app.patch('/todos/:id/done', checksExistsUserAccount, async (req: Request, res: 
   const { id } = req.params
   const todosRepo = getRepository(Todo)
   const todo = await todosRepo.findOne({ id, user_id: req.user.id })
-  if (!todo) return res.status(400).send({ error: 'Could not find todo' })
+  if (!todo) return res.status(404).send({ error: 'Could not find todo' })
   /** Here, we have a valid todo. We shall update the done property to true */
   const updatedTodo = {
     ...todo,
@@ -95,7 +95,7 @@ app.delete('/todos/:id', checksExistsUserAccount, async (req: Request, res: Resp
   const { id } = req.params
   const todosRepo = getRepository(Todo)
   const todo = await todosRepo.findOne({ id, user_id: req.user.id })
-  if (!todo) return res.status(400).send({ error: 'Could not find todo' })
+  if (!todo) return res.status(404).send({ error: 'Could not find todo' })
   await todosRepo.delete(id)
 
   return res.status(204).send(todo)
