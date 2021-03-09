@@ -22,11 +22,10 @@ async function checksExistsUserAccount (req: Request, res: Response, next: NextF
     req.user = user
     return next()
   }
-  req.user = null
-  return next()
+  return res.status(404).send({ error: 'User not found' })
 }
 
-app.post('/users', checksExistsUserAccount, async (req: Request, res: Response): Promise<void> => {
+app.post('/users', async (req: Request, res: Response): Promise<void> => {
   const { name, username } = req.body
   const userRepo = getRepository(User)
   const existingUser = await userRepo.findOne({ username })
@@ -38,7 +37,6 @@ app.post('/users', checksExistsUserAccount, async (req: Request, res: Response):
 })
 
 app.get('/todos', checksExistsUserAccount, async (req: Request, res: Response): Promise<void> => {
-  if (!req.user) return res.status(400).send({ error: 'Could not find user' })
   const { user } = req
   const todosRepo = getRepository(Todo)
   const todos = await todosRepo.find({
@@ -49,7 +47,6 @@ app.get('/todos', checksExistsUserAccount, async (req: Request, res: Response): 
 })
 
 app.post('/todos', checksExistsUserAccount, async (req: Request, res: Response): Promise<void> => {
-  if (!req.user) return res.status(400).send({ error: 'Could not find user' })
   const { title, deadline } = req.body
   const { id } = req.user
   const todosRepo = getRepository(Todo)
@@ -65,7 +62,6 @@ app.post('/todos', checksExistsUserAccount, async (req: Request, res: Response):
 })
 
 app.put('/todos/:id', checksExistsUserAccount, async (req: Request, res: Response): Promise<void> => {
-  if (!req.user) return res.status(400).send({ error: 'Could not find user' })
   const { id } = req.params
   const todosRepo = getRepository(Todo)
   const todo = await todosRepo.findOne({ id, user_id: req.user.id })
@@ -81,7 +77,6 @@ app.put('/todos/:id', checksExistsUserAccount, async (req: Request, res: Respons
 })
 
 app.patch('/todos/:id/done', checksExistsUserAccount, async (req: Request, res: Response): Promise<void> => {
-  if (!req.user) return res.status(400).send({ error: 'Could not find user' })
   const { id } = req.params
   const todosRepo = getRepository(Todo)
   const todo = await todosRepo.findOne({ id, user_id: req.user.id })
@@ -97,7 +92,6 @@ app.patch('/todos/:id/done', checksExistsUserAccount, async (req: Request, res: 
 })
 
 app.delete('/todos/:id', checksExistsUserAccount, async (req: Request, res: Response): Promise<void> => {
-  if (!req.user) return res.status(400).send({ error: 'Could not find user' })
   const { id } = req.params
   const todosRepo = getRepository(Todo)
   const todo = await todosRepo.findOne({ id, user_id: req.user.id })
