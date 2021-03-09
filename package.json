@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node ./dist/app.js",
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/app.ts",
     "test": "jest",
     "test:staged": "jest"
   },
@@ -25,6 +25,7 @@
     "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
     "ts-jest": "^26.5.3",
+    "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.3"
   },
   "dependencies": {
