@@ -29,6 +29,8 @@ async function checksExistsUserAccount (req: Request, res: Response, next: NextF
 app.post('/users', checksExistsUserAccount, async (req: Request, res: Response): Promise<void> => {
   const { name, username } = req.body
   const userRepo = getRepository(User)
+  const existingUser = await userRepo.findOne({ username })
+  if (existingUser) return res.status(400).send({ error: 'Username is already being used' })
   const user = userRepo.create({ name, username })
   await userRepo.save(user)
 
