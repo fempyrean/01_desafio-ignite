@@ -82,4 +82,11 @@ describe('Todos', () => {
     const response = await request(app).delete(`/todos/${String(todoId)}`).set('user', id).send()
     expect(response.status).toBe(204)
   })
+
+  test('Should not be able to delete a non existing todo', async () => {
+    const { id } = user.body
+    const response = await request(app).delete('/todos/invalid_id').set('user', id).send()
+    expect(response.body).toHaveProperty('error')
+    expect(response.status).toBe(404)
+  })
 })
