@@ -13,7 +13,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-async function checksExistsUserAccount (req: Request, res: Response, next: NextFunction): void {
+async function checksExistsUserAccount (req: Request, res: Response, next: NextFunction): Promise<void> {
   if (req.headers.user) {
     const userRepo = getRepository(User)
     const user = await userRepo.findOne({
