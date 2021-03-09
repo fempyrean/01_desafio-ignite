@@ -43,3 +43,10 @@ A **todo** que possuir o :id informado será atualizado para done.
 **DELETE** `/todos/:id`
 A rota deve receber, pelo header da requisição, uma propriedade user contendo o id do usuário.
 O **todo** que possuir o :id, será removido.
+
+## Instruções para teste
+Usar o comando `yarn` na raiz do projeto
+Usar o comando `yarn typeorm migration:run` para rodar as migrations
+Usar o comando `yarn dev` para iniciar o servidor. A aplicação será iniciada na porta 3333
+User o comando `yarn test` para rodar os testes
+*O db fica em src/database/database.sqlite*
