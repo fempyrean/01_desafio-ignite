@@ -4,6 +4,7 @@ import createConnection from '../database'
 import request from 'supertest'
 
 let user = null
+let todo = null
 
 describe('Todos', () => {
   beforeAll(async () => {
@@ -15,7 +16,7 @@ describe('Todos', () => {
       username: 'any_username'
     })
 
-    await request(app).post('/todos').set('user', user.body.id).send({
+    todo = await request(app).post('/todos').set('user', user.body.id).send({
       title: 'any_title',
       deadline: '2021-12-31'
     })
@@ -39,5 +40,15 @@ describe('Todos', () => {
       deadline: '2021-12-31'
     })
     expect(response.status).toBe(201)
+  })
+
+  test('Should be able to update a todo', async () => {
+    const { id } = user.body
+    const { id: todoId } = todo.body
+    const response = await request(app).put(`/todos/${String(todoId)}`).set('user', id).send({
+      title: 'new_title',
+      deadline: '2022-01-01'
+    })
+    expect(response.status).toBe(204)
   })
 })
